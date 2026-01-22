@@ -8,20 +8,24 @@ app.use(express.json());
 
 app.use(
   "/assets/images",
-  express.static(path.join(__dirname, "public/images"))
+  express.static(path.join(__dirname, "public/images")),
 );
 const conn = require("./routes/conn");
 const userRoute = require("./routes/userRoute");
 const authRoute = require("./routes/authRoute");
+const productRoute = require("./routes/productRoute");
+const transactionRoute = require("./routes/transactionRoute");
 
 app.use("/", conn);
 app.use("/", authRoute);
 app.use("/", userRoute);
+app.use(productRoute);
+app.use(transactionRoute);
 
 app.get("/", (_req, res) => {
   res.json({
     res: "ok",
-    message: "Welcome to my api",
+    message: "Welcome to Jajan Kampoeng API",
     status: 200,
   });
 });

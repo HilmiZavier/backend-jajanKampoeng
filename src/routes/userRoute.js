@@ -10,30 +10,27 @@ const {
   authorizationRole,
 } = require("../middleware/auth/auth");
 
-router.get(
-  "/user",
-  authenticateToken,
-  authorizationRole(["admin", "super admin"]),
-  UserController.getAllUser
-);
+router.get("/user", UserController.getAllUser);
 
 router.get("/user/:id", UserController.getUserById);
 router.post(
   "/user",
   upload.none(),
   validate(userSchema.createUserSchema),
-  UserController.createUser
+  UserController.createUser,
 );
+
 router.put(
   "/user/:id",
   validate(userSchema.updateUserSchema),
-  UserController.updateUser
+  UserController.updateUser,
 );
+
 router.delete("/user/:id", UserController.deleteUser);
 router.patch(
   "/user/upload",
   upload.single("images"),
-  UserController.uploadImage
+  UserController.uploadImage,
 );
 
 module.exports = router;
